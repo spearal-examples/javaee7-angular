@@ -1,16 +1,26 @@
 package com.cortez.samples.javaee7angular.rest;
 
-import com.cortez.samples.javaee7angular.data.Person;
-import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
+import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+
+import org.spearal.jaxrs.Spearal;
+
+import com.cortez.samples.javaee7angular.data.Person;
+import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 
 /**
  * REST Service to expose the data to display in the UI grid.
@@ -18,12 +28,12 @@ import java.util.List;
  * @author Roberto Cortez
  */
 @Stateless
-@ApplicationPath("/resources")
 @Path("persons")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class PersonResource extends Application {
-    @PersistenceContext
+@Consumes({ MediaType.APPLICATION_JSON, Spearal.APPLICATION_SPEARAL })
+@Produces({ MediaType.APPLICATION_JSON, Spearal.APPLICATION_SPEARAL })
+public class PersonResource {
+
+	@Inject
     private EntityManager entityManager;
 
     private Integer countPersons() {
@@ -50,7 +60,6 @@ public class PersonResource extends Application {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public PaginatedListWrapper<Person> listPersons(@DefaultValue("1")
                                                     @QueryParam("page")
                                                     Integer page,
