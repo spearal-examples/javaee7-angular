@@ -17,15 +17,11 @@ public class PersonApplication extends Application {
 	@PersistenceUnit
 	private EntityManagerFactory entityManagerFactory;
 	
+	@Produces
 	private SpearalFactory spearalFactory = new DefaultSpearalFactory();
 	
 	@PostConstruct
 	public void init() {
-		SpearalConfigurator.init(entityManagerFactory, spearalFactory);
-	}
-	
-	@Produces
-	public SpearalFactory getSpearalFactory() {
-		return spearalFactory;
+		SpearalConfigurator.init(spearalFactory, entityManagerFactory);
 	}
 }
