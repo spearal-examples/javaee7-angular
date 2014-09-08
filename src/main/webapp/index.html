@@ -28,6 +28,15 @@
     <!-- build:js script/all.js -->
     <script src="script/person.js"></script>
     <!-- endbuild -->
+
+    <!--script src="lib/dependencies/traceur-runtime.js"></script>
+    <script src="lib/dependencies/spearal.js"></script>
+    <script src="lib/dependencies/spearal-angular.js"></script>
+    <script type="text/javascript">
+        app.config(['$resourceProvider', function ($resourceProvider) {
+            spearalAngularConfigureResources($resourceProvider);
+        }]);
+    </script-->
 </head>
 
 <body>
