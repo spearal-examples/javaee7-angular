@@ -87,6 +87,8 @@ app.controller('personsFormController', function ($scope, $rootScope, personServ
 
     // Calls the rest method to save a person.
     $scope.updatePerson = function () {
+    	if ($scope.person.id === undefined)
+    		$scope.person.id = null;
         personService.save($scope.person).$promise.then(
             function () {
                 // Broadcast the event to refresh the grid.
