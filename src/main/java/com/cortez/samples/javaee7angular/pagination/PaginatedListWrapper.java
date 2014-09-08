@@ -1,5 +1,6 @@
 package com.cortez.samples.javaee7angular.pagination;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,8 +8,11 @@ import java.util.List;
  *
  * @author Roberto Cortez
  */
-public class PaginatedListWrapper<T> {
-    private Integer currentPage;
+public class PaginatedListWrapper<T> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer currentPage;
     private Integer pageSize;
     private Integer totalResults;
 

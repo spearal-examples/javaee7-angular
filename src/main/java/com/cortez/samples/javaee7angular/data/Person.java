@@ -1,6 +1,12 @@
 package com.cortez.samples.javaee7angular.data;
 
-import javax.persistence.*;
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 /**
  * Simple entity.
@@ -8,8 +14,11 @@ import javax.persistence.*;
  * @author Roberto Cortez
  */
 @Entity
-public class Person {
-    @Id
+public class Person implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")
     @SequenceGenerator(name = "id", sequenceName = "id")
     private Long id;
