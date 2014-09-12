@@ -6,18 +6,13 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
-import org.spearal.jaxrs.Spearal;
 
 import com.cortez.samples.javaee7angular.data.Person;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
@@ -29,8 +24,6 @@ import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
  */
 @Stateless
 @Path("persons")
-@Consumes({ MediaType.APPLICATION_JSON, Spearal.APPLICATION_SPEARAL })
-@Produces({ MediaType.APPLICATION_JSON, Spearal.APPLICATION_SPEARAL })
 public class PersonResource {
 
 	@Inject
