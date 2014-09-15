@@ -1,8 +1,8 @@
 function spearalAngularInit(resourceProvider, spearalFactory) {
 	
-	var headers = {
-		"Accept": "application/spearal",
-		"Content-Type": "application/spearal"
+	var defaultHeaders = {
+		"Accept": Spearal.APPLICATION_SPEARAL,
+		"Content-Type": Spearal.APPLICATION_SPEARAL
 	};
 	
 	function encode(data, headersGetter) {
@@ -24,10 +24,12 @@ function spearalAngularInit(resourceProvider, spearalFactory) {
 	for (method in actions) {
 		var action = actions[method];
 		action.responseType = 'arraybuffer';
-		action.headers = headers;
 		action.isArray = false;
 		action.transformRequest = [ encode ];
 		action.transformResponse = [ decode ];
+		action.headers = angular.copy(defaultHeaders);
+//		if (method === 'query')
+//			action.headers[Spearal.PROPERTY_FILTER_HEADER] = "com.cortez.samples.javaee7angular.data.Person#id,name,description";
 	}
 }
 
