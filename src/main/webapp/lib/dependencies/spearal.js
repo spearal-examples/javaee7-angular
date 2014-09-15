@@ -1,3 +1,16 @@
+var Spearal = function Spearal() {
+  "use strict";
+};
+($traceurRuntime.createClass)(Spearal, {}, {
+  get APPLICATION_SPEARAL() {
+    "use strict";
+    return "application/spearal";
+  },
+  get PROPERTY_FILTER_HEADER() {
+    "use strict";
+    return "Spearal-PropertyFilter";
+  }
+});
 var SpearalBigNumber = function SpearalBigNumber() {
   "use strict";
 };
