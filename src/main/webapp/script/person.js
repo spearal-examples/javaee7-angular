@@ -36,7 +36,7 @@ app.controller('personsListController', function ($scope, $rootScope, personServ
             sortDirections: $scope.sortInfo.directions[0]
         };
 
-        personService.get(listPersonsArgs, function (data) {
+        personService.query(listPersonsArgs, function (data) {
             $scope.persons = data;
         })
     };
