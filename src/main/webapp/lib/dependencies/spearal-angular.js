@@ -1,4 +1,4 @@
-function spearalAngularConfigureResources(resourceProvider, spearalFactory) {
+function spearalAngularInit(resourceProvider, spearalFactory) {
 	
 	var headers = {
 		"Accept": "application/spearal",
