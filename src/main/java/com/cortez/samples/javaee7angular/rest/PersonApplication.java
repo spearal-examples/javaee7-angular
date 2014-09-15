@@ -20,14 +20,6 @@ public class PersonApplication extends Application {
 	@Produces @PersistenceContext
 	private EntityManager entityManager;
 
-//	@PersistenceContext
-//	private EntityManager entityManager;
-//	
-//	@Produces
-//	public EntityManager getEntityManager() {
-//		return new EntityManagerWrapper(entityManager);
-//	}
-//	
 //	@PersistenceUnit
 //	private EntityManagerFactory entityManagerFactory;
 //	
@@ -36,5 +28,13 @@ public class PersonApplication extends Application {
 //		SpearalFactory spearalFactory = new DefaultSpearalFactory();
 //		SpearalConfigurator.init(spearalFactory, entityManagerFactory);
 //		return spearalFactory;
+//	}
+//
+//	@PersistenceContext
+//	private EntityManager entityManager;
+//	
+//	@Produces
+//	public EntityManager getEntityManager() {
+//		return new EntityManagerWrapper(entityManager);
 //	}
 }
