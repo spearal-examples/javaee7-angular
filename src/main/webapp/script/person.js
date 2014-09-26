@@ -15,6 +15,7 @@ app.controller('personsListController', function ($scope, $rootScope, personServ
             { field: 'id', displayName: 'Id' },
             { field: 'name', displayName: 'Name' },
             { field: 'description', displayName: 'Description' },
+            // { field: 'worstEnemy.name', displayName: 'Worst Enemy' },
             { field: '', width: 30, cellTemplate: '<span class="glyphicon glyphicon-remove remove" ng-click="deleteRow(row)"></span>' }
         ],
 
@@ -48,7 +49,7 @@ app.controller('personsListController', function ($scope, $rootScope, personServ
 
     // Watch the sortInfo variable. If changes are detected than we need to refresh the grid.
     // This also works for the first page access, since we assign the initial sorting in the initialize section.
-    $scope.$watch('sortInfo.fields[0]', function () {
+    $scope.$watch('sortInfo', function () {
         $scope.refreshGrid();
     }, true);
 
@@ -86,10 +87,24 @@ app.controller('personsFormController', function ($scope, $rootScope, personServ
     };
 
     // Calls the rest method to save a person.
-    $scope.updatePerson = function () {
-    	if ($scope.person.id === undefined)
-    		$scope.person.id = null;
-        personService.save($scope.person).$promise.then(
+    $scope.updatePerson = function (personForm) {
+    	var person = angular.copy($scope.person);
+    	
+    	if (person.id === undefined)
+    		person.id = null;
+
+    	/*
+    	delete person._class;
+    	if (!personForm.name.$dirty)
+    		delete person.name;
+    	if (!personForm.description.$dirty)
+    		delete person.description;
+    	if (!personForm.imageUrl.$dirty)
+    		delete person.imageUrl;
+    	alert('Person to save: ' + angular.toJson(person, true));
+    	*/
+    	
+        personService.save(person).$promise.then(
             function () {
                 // Broadcast the event to refresh the grid.
                 $rootScope.$broadcast('refreshGrid');
@@ -154,6 +169,10 @@ app.controller('alertMessagesController', function ($scope) {
         $scope.alerts.splice(index, 1);
     };
 });
+
+app.config(['$resourceProvider', function ($resourceProvider) {
+	$resourceProvider.defaults.actions['query'].isArray = false;
+}]);
 
 // Service that provides persons operations
 app.factory('personService', function ($resource) {

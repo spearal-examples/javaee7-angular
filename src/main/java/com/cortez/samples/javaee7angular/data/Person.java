@@ -3,10 +3,11 @@ package com.cortez.samples.javaee7angular.data;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.ManyToOne;
 
 /**
  * Simple entity.
@@ -18,9 +19,7 @@ public class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")
-    @SequenceGenerator(name = "id", sequenceName = "id")
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -28,8 +27,19 @@ public class Person implements Serializable {
     private String description;
 
     private String imageUrl;
+/*    
+	@ManyToOne
+	private Person worstEnemy;
 
-    public Long getId() {
+	public Person getWorstEnemy() {
+		return worstEnemy;
+	}
+
+	public void setWorstEnemy(Person worstEnemy) {
+		this.worstEnemy = worstEnemy;
+	}
+*/
+	public Long getId() {
         return id;
     }
 

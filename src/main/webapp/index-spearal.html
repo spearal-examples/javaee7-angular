@@ -28,6 +28,49 @@
     <!-- build:js script/all.js -->
     <script src="script/person.js"></script>
     <!-- endbuild -->
+
+    <script src="lib/dependencies/traceur-runtime.js"></script>
+    <script src="lib/dependencies/spearal.js"></script>
+    <script type="text/javascript">
+	    app.config(['$resourceProvider', function ($resourceProvider) {
+	
+	        function encode(data, headersGetter) {
+	            if (data !== undefined) {
+	                var encoder = spearalFactory.newEncoder();
+	                encoder.writeAny(data);
+	                return new Uint8Array(encoder.buffer);
+	            }
+	        }
+	
+	        function decode(arraybuffer, headersGetter) {
+	            if (arraybuffer && arraybuffer.byteLength > 0)
+	                return spearalFactory.newDecoder(arraybuffer).readAny();
+	        }
+	            
+	        var spearalFactory = new SpearalFactory();
+	        var contentTypeHeaders = {
+	            "Accept": Spearal.APPLICATION_SPEARAL,
+	            "Content-Type": Spearal.APPLICATION_SPEARAL
+	        };
+	
+	        var actions = $resourceProvider.defaults.actions;
+	        for (method in actions) {
+	            var action = actions[method];
+	            action.responseType = 'arraybuffer';
+	            action.transformRequest = [ encode ];
+	            action.transformResponse = [ decode ];
+	            action.headers = angular.copy(contentTypeHeaders);
+	            /*
+	            if (method === "query") {
+	                action.headers[Spearal.PROPERTY_FILTER_HEADER] = Spearal.filterHeader(
+	                    "com.cortez.samples.javaee7angular.data.Person",
+	                    "id", "name", "description"
+	                );
+	            }
+	            */
+	        }
+	    }]);
+    </script>
 </head>
 
 <body>
@@ -72,7 +115,7 @@
 
     <div>
         <!-- Specify the function to be called on submit and disable HTML5 validation, since we're using Angular validation-->
-        <form name="personForm" ng-submit="updatePerson()" novalidate>
+        <form name="personForm" ng-submit="updatePerson(personForm)" novalidate>
 
             <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
             <div class="form-group" ng-class="{'has-error' : personForm.name.$invalid && personForm.name.$dirty}">

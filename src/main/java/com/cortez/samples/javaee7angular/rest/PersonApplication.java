@@ -17,24 +17,21 @@ import org.spearal.jpa2.SpearalConfigurator;
 @ApplicationPath("/resources")
 public class PersonApplication extends Application {
 
-	@Produces @PersistenceContext
-	private EntityManager entityManager;
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
 
-//	@PersistenceUnit
-//	private EntityManagerFactory entityManagerFactory;
-//	
-//	@Produces @ApplicationScoped
-//	public SpearalFactory getSpearalFactory() {
-//		SpearalFactory spearalFactory = new DefaultSpearalFactory();
-//		SpearalConfigurator.init(spearalFactory, entityManagerFactory);
-//		return spearalFactory;
-//	}
-//
-//	@PersistenceContext
-//	private EntityManager entityManager;
-//	
-//	@Produces
-//	public EntityManager getEntityManager() {
-//		return new EntityManagerWrapper(entityManager);
-//	}
+    @PersistenceContext
+    private EntityManager entityManager;
+    
+    @Produces @ApplicationScoped
+    public SpearalFactory getSpearalFactory() {
+        SpearalFactory spearalFactory = new DefaultSpearalFactory();
+        SpearalConfigurator.init(spearalFactory, entityManagerFactory);
+        return spearalFactory;
+    }
+    
+    @Produces
+    public EntityManager getEntityManager() {
+        return new EntityManagerWrapper(entityManager);
+    }
 }

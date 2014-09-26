@@ -36,10 +36,24 @@ public class PersonResource {
 
     @SuppressWarnings("unchecked")
     private List<Person> findPersons(int startPosition, int maxResults, String sortFields, String sortDirections) {
-        Query query = entityManager.createQuery("SELECT p FROM Person p ORDER BY " + sortFields + " " + sortDirections);
+        Query query = entityManager.createQuery("SELECT p FROM Person p ORDER BY p." + sortFields + " " + sortDirections);
         query.setFirstResult(startPosition);
         query.setMaxResults(maxResults);
         return query.getResultList();
+
+        /*
+        List<Person> persons = query.getResultList();
+        System.out.println("-------------");
+        for (Person p : persons) {
+        	System.out.printf(
+        		"%d) %s's worst enemy: %s\n",
+        		p.getId(),
+        		p.getName(),
+        		(p.getWorstEnemy() != null ? p.getWorstEnemy().getClass().getName() : "null")
+        	);
+        }
+        return persons;
+        */
     }
 
     private PaginatedListWrapper<Person> findPersons(PaginatedListWrapper<Person> wrapper) {
@@ -78,6 +92,9 @@ public class PersonResource {
 
     @POST
     public Person savePerson(Person person) {
+    	return entityManager.merge(person);
+
+    	/*    	
         if (person.getId() == null) {
             Person personToSave = new Person();
             personToSave.setName(person.getName());
@@ -93,6 +110,7 @@ public class PersonResource {
         }
 
         return person;
+        */
     }
 
     @DELETE
