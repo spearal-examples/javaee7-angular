@@ -2,12 +2,7 @@ package com.cortez.samples.javaee7angular.data;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Simple entity.
@@ -27,7 +22,7 @@ public class Person implements Serializable {
     private String description;
 
     private String imageUrl;
-/*    
+/*
 	@ManyToOne
 	private Person worstEnemy;
 
