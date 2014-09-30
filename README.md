@@ -2,22 +2,14 @@
 
 ## How to run ? ##
 
-* You need JDK 7 or higher, Maven 3 and Wildfly 8 to run the application.
+You need a Git client, a JDK 7 or higher and Maven 3:
 
-* Build the code using Maven with the command: `mvn clean install`.
+```bash
+$ git clone https://github.com/spearal-examples/javaee7-angular.git
+$ cd javaee7-angular
+$ mvn clean install wildfly:run
+```
 
-* Copy the file javaee7-angular-3.1.war from target directory to your Wildfly installation folder /standalone/deployments
+Then, you can access the Spearal version at http://localhost:8080/javaee7-angular-3.1/index-spearal.html and the original JSON one at http://localhost:8080/javaee7-angular-3.1/.
 
-* Start Wildfly and go to http://localhost:8080/javaee7-angular-3.1/
-
-## Javascript Package Management (optional) ##
-
-* The required JS libraries are included in the project, but it also possible to manage them with the next steps.
-
-* You need NPM. Please go to http://nodejs.org/download/ to get a copy.
-
-* Once NPM is installed run the command `npm install`.
-
-* Install Grunt `npm install -g grunt-cli`  for more information please go to http://gruntjs.com/getting-started.
-
-* Run the command 'grunt' to download all the web dependencies and build an optimized version of the project.
+See this article for more information: http://java.dzone.com/articles/beyond-json-introducing.
